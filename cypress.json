@@ -1,0 +1,8 @@
+{
+    "failOnStatusCode": false,
+    "chromeWebSecurity": false,
+    "modifyObstructiveCode": false,
+    "env":{
+        "url":"https://www.sastaticket.pk/air/login"
+    } 
+}
