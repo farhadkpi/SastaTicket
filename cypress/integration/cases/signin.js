@@ -1,3 +1,4 @@
+require('cypress-xpath')
 import Login from '../../support/pomBus/pomlogin';
 import History from '../../support/pomBus/pomhistory';
 describe('Verify Browser Stack Home Page', function ()  {
@@ -40,5 +41,20 @@ describe('Verify Browser Stack Home Page', function ()  {
           }
        })
 
+    })
+
+    it('Verify the Dubai as the Destination', function (){
+        const homePage=new Login();
+        homePage.sastaUrl();
+        homePage.clickDubaiLink()
+        homePage.assertDubaiFlight()
+        homePage.assertDateForDubai()
+    })
+
+    it('Verify the Airline name in list', function (){
+        const homePage=new Login();
+        homePage.sastaUrl();
+        homePage.redirectAirlineLink()
+        homePage.assertAirline()
     })
 })
