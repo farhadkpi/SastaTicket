@@ -25,6 +25,7 @@ class Login
 
     assertDubaiFlight()
     {
+      cy.wait(2000)
       cy.xpath('(//span[@class="city_code"])[2]')
       .invoke('text').then((assertDubai) => {
           expect(assertDubai).to.eq('DXB')
@@ -34,18 +35,19 @@ class Login
     {
       cy.xpath('(//div[@class="date"])[5]')
       .invoke('text').then((assertDate) => {
-          cy.xpath('(//div[@class="date"])[5]').click()
+          cy.wait(3000).xpath('(//div[@class="date"])[5]').click()
           cy.xpath('(//button[@class="sasta-btn select-btn "])[1]').click()
+          cy.wait(2000)
           cy.get('#wrapper > div.page-holder > div > div.trip-row > div.trip-column.content > div > div.content.trip-content > div.trip-holder > div > span')
           .invoke('text').then((Week) => {
-            let week = Week.substring(10,16)
+            let week = Week.substring(8,16)
             expect(assertDate).to.contains(week)
           })
       })
     }
     assertAirline()
     {
-      cy.xpath('(//div[@class="tda-box"])[1]').click()
+      cy.xpath('(//div[@class="tda-box"])[1]').click().wait(2000)
       for(let i=1;i<=5;i++)
       {
         cy.xpath(`(//p[@class="airline-name-off"])[${i}]`)

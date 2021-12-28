@@ -25,14 +25,16 @@ class Bus {
   }
   selectCalendar() {
       cy.get('#wrapper > div.sc-bdVaJa.jMfdRe > div > div > div:nth-child(2) > div.sc-bdVaJa.cBGrJP > div > div > div > div > input').click()
+      cy.wait(2000)
       cy.xpath('(//div[@aria-disabled="false"])')
           .its('length').then((len) => {
               let randd = Math.floor((Math.random() * len) + 1);
-              cy.xpath(`(//div[@aria-disabled="false"])[${randd}]`).click()
+              cy.xpath(`(//div[@aria-disabled="false"])[3]`).click()
           })
 
   }
   clickrandomseat() {
+    cy.wait(2000)
       cy.xpath('(//button[@class="sc-bdVaJa sc-cSHVUG bspotd"])[1]')
           .contains('Check Seats').click()
       cy.wait(3000)
@@ -40,12 +42,14 @@ class Bus {
           .its('length').then((len) => {
               console.log(len)
               let rand = Math.floor((Math.random() * len));
+              cy.wait(1000)
               cy.xpath(`(//div[@class="sc-bdVaJa kYfgeE"]//div[@x-type="flexbox"][not(@class="sc-bdVaJa jdRrPY")][not(@class="sc-bdVaJa iHUYbp")][contains(@style,"cursor: pointer")])[${rand}]`).click()
           })
   }
 
 
   clickreservegender() {
+    cy.wait(2000)
       cy.xpath('(//div[@class="sc-bdVaJa brJkeo"]//div[@class="sc-bxivhb sc-ifAKCX iuWikR"])')
           .its('length').then((len) => {
               console.log(len)
@@ -68,11 +72,11 @@ class Bus {
   clickreservedseat() {
       return cy.wait(2000)
           .xpath('(//button[@class="sc-bdVaJa sc-cSHVUG bspotd"])[1]').contains('Check Seats').click()
-          .xpath('//div[@class="sc-bdVaJa kYfgeE"]//div[@x-type="flexbox"][not(@class="sc-bdVaJa jdRrPY")][(@class="sc-iRbamj crVwhE sc-bdVaJa geBVyB")][contains(@style,"cursor: not-allowed")]')
+          .xpath('(//div[@class="sc-bdVaJa kYfgeE"]//div[@x-type="flexbox"][not(@class="sc-bdVaJa jdRrPY")][(@class="sc-iRbamj crVwhE sc-bdVaJa geBVyB")][contains(@style,"background-color: rgb(0, 111, 174);")])')
           .its('length').then((len) => {
               console.log(len)
               let rand1 = Math.floor((Math.random() * len) + 1);
-              cy.wait(1000)
+              cy.wait(2000)
               cy.xpath(`(//div[@class="sc-bdVaJa kYfgeE"]//div[@x-type="flexbox"][not(@class="sc-bdVaJa jdRrPY")][(@class="sc-iRbamj crVwhE sc-bdVaJa geBVyB")][contains(@style,"background-color: rgb(0, 111, 174);")])[${rand1}]`)
                   .should('have.css', 'background-color', 'rgb(0, 111, 174)')
           })
@@ -80,6 +84,7 @@ class Bus {
 
 
   assertbusfare() {
+    cy.wait(2000)
       cy.get('#wrapper > div.sc-bdVaJa.kCvNRo > div > div.sc-bdVaJa.fyQZSD > div.sc-bdVaJa.jMhOdN > div:nth-child(3) > div > div.sc-bdVaJa.jqCuqa > h2')
           .invoke('text').then((check) => {
               cy.wait('@userinfo').then((res) => {
@@ -90,6 +95,7 @@ class Bus {
 
 
   assertfilterbar() {
+    cy.wait(2000)
       cy.xpath('/html/body/div[1]/div[2]/div[1]/div/div[4]/div[1]/div/div[2]/div/div[3]/div/div/div[4]')
           .invoke('attr', 'style', 'left: 50%; right: auto; transform: translateX(-50%);')
           .invoke('attr', 'aria-valuenow', '50')
@@ -98,12 +104,14 @@ class Bus {
 
 
   assertorigin() {
+    cy.wait(2000)
       cy.get('.Toastify').find('.Toastify__toast-body').invoke('text').then((check) => {
           expect(check).to.eq('Please select origin.')
       })
   }
 
   getDeptime() {
+      cy.wait(2000)
       cy.get('#wrapper > div.sc-bdVaJa.kCvNRo > div > div.sc-bdVaJa.fyQZSD > div.sc-bdVaJa.jMhOdN > div:nth-child(3) > div > div.sc-bdVaJa.heviWS > div.sc-bdVaJa.eCpvEl > div:nth-child(1) > label.sc-bxivhb.sc-ifAKCX.dewvAZ')
           .invoke('text').then((time) => {
               cy.get('#wrapper > div.sc-bdVaJa.kCvNRo > div > div.sc-bdVaJa.fyQZSD > div.sc-bdVaJa.jMhOdN > div:nth-child(3) > div.ReactCollapse--collapse > div > div > div.sc-bdVaJa.biYZFf > div > div:nth-child(3) > div.sc-bxivhb.sc-ifAKCX.kwDFMv')

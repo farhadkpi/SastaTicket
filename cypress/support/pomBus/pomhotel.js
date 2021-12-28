@@ -10,25 +10,25 @@ class Hotel {
         return this
     }
     clickHotelSearch() {
-        return cy.wait(1000)
+        return cy.wait(2000)
             .get('#wrapper > div:nth-child(2) > div.hotel-search-holder > div > div > form > div.search-button-wrapper > button')
             .click()
     }
     clickTravelers() {
-        return cy.wait(1000)
+        return cy.wait(2000)
             .xpath('//*[@id="wrapper"]/div[1]/div[1]/div[2]/form/div[1]/div[2]/div[2]/div/span/span')
             .click({
                 force: true
             })
     }
     addChild() {
-        return cy.wait(1000)
+        return cy.wait(2000)
             .xpath('//*[@id="wrapper"]/div[1]/div[1]/div[2]/form/div[1]/div[2]/div[2]/div[3]/div/div/div/div[3]/div[2]/button[2]/label').click()
             .get('select').select('10')
             .xpath('//*[@id="wrapper"]/div[1]/div[1]/div[2]/form/div[2]/button').click()
     }
     assertChild() {
-        return cy.wait(1000)
+        return cy.wait(2000)
             .xpath('//span[@class="guest-details"]').invoke('text').then(child => {
                 expect(child).to.contain('Child')
             })
@@ -38,6 +38,7 @@ class Hotel {
         let arr = []
         let i;
         var highest = []
+        cy.wait(2000)
         cy.xpath('(//div[@class="original-price"]//ins//span)')
             .its('length').then((len) => {
                 for (i = 1; i < len; i++) {
@@ -46,7 +47,7 @@ class Hotel {
                         p = p.replace(',', '')
                         arr.push(p)
                         highest = arr
-                        console.log(highest[i])
+                        //console.log(highest[i])
                         highest[0] = Math.min(...highest)
                     })
                 }
